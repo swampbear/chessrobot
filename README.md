@@ -1,12 +1,12 @@
-# chessrobot
+# hvl robotics hessrobot
 
 Welcome to the HVL ROBOTICS chessrobot project
 
-## Running the applications
+# Running the applications
 Both applications needs to run simontaniusly for the socket s to be able to connect.
 
 
-### Python flask server
+## Python flask server
 When in chessrobot folder
 
 Manouvver to flask-server
@@ -20,7 +20,7 @@ source venv/bin/activate
 ````
 
 
-### React web-client
+## React web-client
 Manouver to web-chessrobot
 ````
 cd web-chessrobot
@@ -29,7 +29,7 @@ If its the first time running run:
 ````
 npm install
 ````
-to start the server run the following command:
+To start the server run the following command:
 ````
 npm start
 ````
