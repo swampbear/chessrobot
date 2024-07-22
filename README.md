@@ -1,4 +1,4 @@
-# hvl robotics hessrobot
+# HVL ROBOTICS CHESSROBOT
 
 Welcome to the HVL ROBOTICS chessrobot project
 
@@ -18,6 +18,14 @@ Activate (venv) when in flask-server folder
 ````
 source venv/bin/activate
 ````
+If its the first time running run:
+````
+pip3 install <missing_packages>
+````
+To start server run:
+````
+python3 app.js
+````
 
 
 ## React web-client
@@ -33,3 +41,18 @@ To start the server run the following command:
 ````
 npm start
 ````
+
+### Project progression
+
+## GUI
+- [ ] Set up project
+- [ ] Home page
+- [ ] Set up socket
+- [ ] Selection page
+- [ ] Boardconfig page
+- [ ] Game page
+- [ ] Chessboard component communicationg with backend
+- [ ] GameOver page
+
+## PYTHON-Backend
+//to be filled out
