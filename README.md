@@ -45,11 +45,11 @@ npm start
 ### Project progression
 
 ## GUI
-- [ ] Set up project
-- [ ] Home page
-- [ ] Set up socket
-- [ ] Selection page
-- [ ] Boardconfig page
+- [x] Set up project
+- [x] Home page
+- [x] Set up socket
+- [x] Selection page
+- [x] Boardconfig page
 - [ ] Game page
 - [ ] Chessboard component communicationg with backend
 - [ ] GameOver page
