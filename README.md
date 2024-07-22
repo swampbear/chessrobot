@@ -7,9 +7,10 @@ For the project to function correctly, both applications need to run simultaneou
 ## Table of Contents
 
 1. [Running the application](#running)
-2. [Python flask server](#subrunning1)
-3. [React web-client](#subrunning2)
-4. [Project progression](#progression)
+ 1. [Python flask server](#subrunning1)
+ 2. [React web-client](#subrunning2)
+3. [Project progression](#progression)
+4. [Summary](#summary)
 
 # Running the applications <a name="running"></a>
 Both applications needs to run simontaniusly for the socket s to be able to connect.
@@ -69,7 +70,7 @@ The project consists of several key stages, both for the graphical user interfac
 - [x] Set up socket
 - [ ] Integrate with Chess program (currently located in another repository)
 
-## Summary
+## Summary <a name="summary"></a>
 
 The HVL Robotics ChessRobot project aims to create a fully functional and interactive chess-playing robot. The React client provides an intuitive user interface, while the Python Flask server handles the backend operations, including the integration of a sophisticated chess program. As the project progresses, features like game board configuration, in-game communication, and game-over handling will be implemented to enhance the overall user experience.
 
