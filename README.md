@@ -42,9 +42,9 @@ To start the server run the following command:
 npm start
 ````
 
-### Project progression
+## Project progression
 
-## GUI
+### GUI
 - [x] Set up project
 - [x] Home page
 - [x] Set up socket
@@ -54,5 +54,5 @@ npm start
 - [ ] Chessboard component communicationg with backend
 - [ ] GameOver page
 
-## PYTHON-Backend
+### PYTHON-Backend
 //to be filled out
