@@ -6,7 +6,7 @@ Welcome to the HVL ROBOTICS chessrobot project. This project consists of two app
 Both applications needs to run simontaniusly for the socket s to be able to connect.
 
 
-## Python flask server
+## Python flask server - terminal comands
 When in chessrobot folder
 
 Manouvver to flask-server
@@ -28,7 +28,7 @@ python3 app.js
 ````
 
 
-## React web-client
+## React web-client - terminal commands
 Manouver to web-chessrobot
 ````
 cd web-chessrobot
