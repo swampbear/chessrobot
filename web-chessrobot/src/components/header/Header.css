@@ -1,0 +1,26 @@
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px; /* Height of the header */
+    color: #fff;
+
+  }
+  
+  #company {
+    font-size: 2em; /* Size of the company text */
+  }
+  
+  #company .bold {
+    font-weight: bold; /* Bold text for "robotics" */
+  }
+
+  #company:hover{
+    cursor: pointer;
+  }
+  
+  #about {
+    font-size: 1.8em; /* Size of the about text */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-transform: lowercase; /* Optional: transform text to uppercase */
+  }

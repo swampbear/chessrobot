@@ -1,0 +1,202 @@
+:root {
+    --dark: #24227E;
+    --light: aliceblue;
+    --button-bg: #4285F4;
+    --button-hover-bg: #c8bfbe;
+    --button-text: #ffffff;
+    --button-border: #ffffff;
+    --border-radius: 20px;
+}
+
+/* For Webkit browsers (Chrome, Safari, etc.) */
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: var(--dark);
+    color: aliceblue;
+}
+
+#header-container {
+    padding: 0 5%;
+    text-align: center;
+}
+
+#content-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em 0;
+    box-sizing: border-box;
+}
+
+#left-panel,
+#right-panel {
+    width: 100%;
+    height: 75.5dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+#opponent-info, 
+#player-info {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    margin-right: 15px;
+    overflow: hidden; 
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the whole div */
+}
+
+.opponent-details, 
+.player-details {
+    text-align: left;
+    font-size: .8rem;
+}
+
+.opponent-details h2,
+.player-details h2 {
+    margin-bottom: 0;
+    padding: 0;
+    font-size: 1.2em;
+}
+
+.opponent-details p,
+.player-details p {
+    margin-top: 0; /* Remove the top margin */
+    padding: 0; /* Remove any default padding */
+    font-size: 1rem;
+}
+
+#chessboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.chessboard {
+    width: 100%;
+    height: 100%;
+}
+
+#right-panel {
+    align-items: center;
+    width: 100%;
+}
+
+#moves-played {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: left;
+    font-size: larger;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background-color: #D5D4FF;
+    color: #000;
+    border-radius: 10px;
+}
+
+#status-message {
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    min-height: 30%;
+    width: 80%;
+    max-width: 100%;
+}
+
+#buttons-container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 400px;
+}
+
+.resign-button, 
+.confirm-button {
+    width: 48%;
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.resign-button {
+    background-color: #F24E1E;
+}
+
+.confirm-button {
+    background-color: #28a745;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    #content-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        min-width: 80vw;
+    }
+
+    #left-panel,
+    #right-panel {
+        width: 48%;
+        margin-bottom: 0;
+    }
+
+    #chessboard-container {
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1024px) {
+    #header-container {
+        padding: 0 10%;
+    }
+
+    #moves-played {
+        font-size: 1.2rem;
+    }
+
+    .resign-button, 
+    .confirm-button {
+        font-size: 1.5rem;
+    }
+}

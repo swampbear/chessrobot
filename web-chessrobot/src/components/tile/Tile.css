@@ -1,0 +1,61 @@
+
+
+:root {
+    --dark: #24227E;
+    --light: aliceblue;
+    --tile-size: 60px; /* Default tile size */
+}
+
+.tile {
+    width: var(--tile-size);
+    height: var(--tile-size);
+    display: grid;
+    place-content: center;
+}
+
+.black-tile {
+    background-color: var(--dark);
+}
+
+.white-tile {
+    background-color: var(--light);
+}
+
+.tile .chess-piece:hover {
+    cursor: grab;
+}
+
+.tile .chess-piece:active {
+    cursor: grabbing;
+}
+.tile .chess-piece{
+    width: 2.8em;
+    height: 2.8rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* Responsive Design */
+@media (min-width: 480px) {
+    :root {
+        --tile-size: 40px; /* Increase tile size for larger screens */
+    }
+}
+
+@media (min-width: 768px) {
+    :root {
+        --tile-size: 60px; /* Further increase tile size for even larger screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    :root {
+        --tile-size: 70px; /* Max tile size for large screens */
+    }
+
+    .tile .chess-piece{
+        width: 4.5em;
+        height: 4.5rem;
+    }
+}
