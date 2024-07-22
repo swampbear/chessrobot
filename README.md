@@ -55,7 +55,6 @@ npm start
 - [ ] GameOver page
 
 ### PYTHON-Backend
-//to be filled out
 - [x] Set up flask-server project
 - [x] Set up socket
 - [ ] Combine with Chessprogram(In another repo for the moment)
