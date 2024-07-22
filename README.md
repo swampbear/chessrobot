@@ -6,16 +6,16 @@ For the project to function correctly, both applications need to run simultaneou
 
 ## Table of Contents
 
-1. [Running the application](#Running_the_applications)
-2. [Python flask server](#Python_flask_server)
-3. [React web-client](#React_web-client)
-4. [Project progression](#Project_progression)
+1. [Running the application](#running)
+2. [Python flask server](#subrunning1)
+3. [React web-client](#subrunning2)
+4. [Project progression](#progression)
 
-# Running the applications
+# Running the applications <a name="running"></a>
 Both applications needs to run simontaniusly for the socket s to be able to connect.
 
 
-## Python flask server - terminal comands
+## Python flask server - terminal comands <a name="subrunning1"></a>
 Navigate to the chessrobot folder:
 Manouvver to flask-server
 ````bash
@@ -36,7 +36,7 @@ python3 app.js
 ````
 
 
-## React web-client - terminal commands
+## React web-client - terminal commands <a name="subrunning2"></a>
 Navigate to the web-chessrobot folder:
 ````bash
 cd web-chessrobot
@@ -50,7 +50,7 @@ Start the React development server:
 npm start
 ````
 
-## Project progression
+## Project progression <a name="progression"></a>
 
 The project consists of several key stages, both for the graphical user interface (GUI) and the Python backend. Below is an overview of the current progress:
 
