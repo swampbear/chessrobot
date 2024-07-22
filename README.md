@@ -7,8 +7,8 @@ For the project to function correctly, both applications need to run simultaneou
 ## Table of Contents
 
 1. [Running the application](#running)
- 1. [Python flask server](#subrunning1)
- 2. [React web-client](#subrunning2)
+   1. [Python flask server](#subrunning1)
+   2. [React web-client](#subrunning2)
 3. [Project progression](#progression)
 4. [Summary](#summary)
 
