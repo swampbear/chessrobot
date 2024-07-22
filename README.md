@@ -1,6 +1,6 @@
 # HVL ROBOTICS CHESSROBOT
 
-Welcome to the HVL ROBOTICS chessrobot project
+Welcome to the HVL ROBOTICS chessrobot project. This project consists of two applications. A react-typescript application acting as a client, and a pyhon program as the server. They are connectiong using a socket connection
 
 # Running the applications
 Both applications needs to run simontaniusly for the socket s to be able to connect.
@@ -56,3 +56,6 @@ npm start
 
 ### PYTHON-Backend
 //to be filled out
+- [x] Set up flask-server project
+- [x] Set up socket
+- [ ] Combine with Chessprogram(In another repo for the moment)
