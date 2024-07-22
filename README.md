@@ -1,50 +1,54 @@
 # HVL ROBOTICS CHESSROBOT
 
-Welcome to the HVL ROBOTICS chessrobot project. This project consists of two applications. A react-typescript application acting as a client, and a pyhon program as the server. They are connectiong using a socket connection
+Welcome to the HVL Robotics ChessRobot project! This innovative project consists of two main applications: a React-TypeScript client application and a Python Flask server. These two components communicate with each other via a socket connection, allowing for a seamless and interactive chess-playing experience.
+
+For the project to function correctly, both applications need to run simultaneously, ensuring that the socket connection remains active.
+
 
 # Running the applications
 Both applications needs to run simontaniusly for the socket s to be able to connect.
 
 
 ## Python flask server - terminal comands
-When in chessrobot folder
-
+Navigate to the chessrobot folder:
 Manouvver to flask-server
-````
+````bash
 cd flask-server
 ````
 
-Activate (venv) when in flask-server folder
-````
+Activate the virtual environment:
+````bash
 source venv/bin/activate
 ````
-If its the first time running run:
-````
+Install dependencies (only needed the first time):
+ ````bash
 pip3 install <missing_packages>
 ````
-To start server run:
-````
+Start the Flask server:
+ ````bash
 python3 app.js
 ````
 
 
 ## React web-client - terminal commands
-Manouver to web-chessrobot
-````
+Navigate to the web-chessrobot folder:
+````bash
 cd web-chessrobot
 ````
-If its the first time running run:
-````
+Install dependencies (only needed the first time):
+````bash
 npm install
 ````
-To start the server run the following command:
-````
+Start the React development server:
+````bash
 npm start
 ````
 
 ## Project progression
 
-### GUI
+The project consists of several key stages, both for the graphical user interface (GUI) and the Python backend. Below is an overview of the current progress:
+
+### GUI Development
 - [x] Set up project
 - [x] Home page
 - [x] Set up socket
@@ -54,7 +58,13 @@ npm start
 - [ ] Chessboard component communicationg with backend
 - [ ] GameOver page
 
-### PYTHON-Backend
+### Python Backend Development
 - [x] Set up flask-server project
 - [x] Set up socket
-- [ ] Combine with Chessprogram(In another repo for the moment)
+- [ ] Integrate with Chess program (currently located in another repository)
+
+## Summary
+
+The HVL Robotics ChessRobot project aims to create a fully functional and interactive chess-playing robot. The React client provides an intuitive user interface, while the Python Flask server handles the backend operations, including the integration of a sophisticated chess program. As the project progresses, features like game board configuration, in-game communication, and game-over handling will be implemented to enhance the overall user experience.
+
+By following the provided instructions, you can set up and run both the client and server applications, contributing to the development and refinement of this exciting project.
