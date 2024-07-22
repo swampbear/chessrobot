@@ -4,6 +4,12 @@ Welcome to the HVL Robotics ChessRobot project! This innovative project consists
 
 For the project to function correctly, both applications need to run simultaneously, ensuring that the socket connection remains active.
 
+## Table of Contents
+
+1. [Running the application](#Running_the_applications)
+2. [Python flask server](#Python_flask_server)
+3. [React web-client](#React_web-client)
+4. [Project progression](#Project_progression)
 
 # Running the applications
 Both applications needs to run simontaniusly for the socket s to be able to connect.
