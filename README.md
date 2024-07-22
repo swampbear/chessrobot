@@ -26,6 +26,10 @@ Manouver to web-chessrobot
 cd web-chessrobot
 ````
 If its the first time running run:
-````js
+````
 npm install
+````
+to start the server run the following command:
+````
+npm start
 ````
