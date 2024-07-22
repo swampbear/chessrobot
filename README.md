@@ -10,10 +10,10 @@ When in chessrobot folder
 Manouvver to flask-server
 ````
 cd flask-server
+````
 
-Activate (venv)
-
+Activate (venv) when in flask-server folder
 ````
 source venv/bin/activate
-
+````
 
