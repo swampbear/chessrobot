@@ -11,7 +11,6 @@ import {motion} from "framer-motion"
 
 const Game = () => {
     const { pieceColor, setPieceColor } = usePieceColor();
-    const [isValid, setIsValid] = useState(false);
     const [isPlayerTurn, setIsPlayerTurn] = useState(pieceColor === 'white');
     const [statusMessage, setStatusMessage] = useState("");
     const [difficulty, setDifficulty] = useState(() => {
@@ -21,6 +20,7 @@ const Game = () => {
     const [loading, setLoading] = useState(true);
     const { socket } = useSocket();
 
+    const [dgtBoardFEN, setDgtBoardFEN] = useState<string>("");
     const [playerMove, setPlayerMove] = useState<JSON>();
     const [robotMove, setRobotMove] = useState<JSON>();
 
@@ -97,7 +97,7 @@ const Game = () => {
     
 
     const handleConfirmMove = async () => {
-        if (isValid) {
+        if (true) { //PlayerMove.isLegal && isPlayerTurn
             setIsPlayerTurn(false);
             await new Promise(r => setTimeout(r, 3000));
             setIsPlayerTurn(true);
@@ -142,7 +142,7 @@ const Game = () => {
                             </div>
                         ) : (
                             <ErrorBoundary fallback="Error loading the chessboard">
-                                <Chessboard setIsValid={setIsValid} />
+                                <Chessboard dgtBoardFEN={dgtBoardFEN} />
                             </ErrorBoundary>
                         )}
                     </div>

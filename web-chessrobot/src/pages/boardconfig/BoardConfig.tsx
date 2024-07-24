@@ -14,9 +14,11 @@ import { motion } from "framer-motion"
 
 const BoardConfig = () => {
     const { socket } = useSocket();
-    const [isValid, setIsValid] = useState<boolean>(false);
+    const [isValid, setIsValid] = useState<boolean>(true);
     const { pieceColor, setPieceColor } = usePieceColor();
     const [loading, setLoading] = useState<boolean>(true);
+    const [startFen, setStartFen] = useState('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR')
+
     const navigate = useNavigate();
     
 
@@ -84,7 +86,7 @@ const BoardConfig = () => {
                             </div>
                         ) : (
                             <ErrorBoundary fallback={<h2>Error loading board...</h2>}>
-                                <Chessboard setIsValid={setIsValid} />
+                                <Chessboard dgtBoardFEN={startFen} />
                             </ErrorBoundary>
                         )}
                     </div>
