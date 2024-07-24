@@ -23,14 +23,15 @@ const BoardConfig = () => {
     useEffect(() => {
         function fetchPieceColor() {
             try {
-                socket?.emit('getColor');
-                socket?.on('getColor', (color: string) => {
+                if(socket){
+                socket.emit('getColor');
+                socket.on('getColor', (color: string) => {
                     if(color === ''){
                         throw new Error('Color cannot be empty')
                     }
                     setPieceColor(color);
                     setLoading(false);
-                });
+                });}
             } catch (error) {
                 console.error(error);
                 alert("There has been an error fetching pieceColor from python socket")

@@ -21,8 +21,14 @@ const Game = () => {
     const [loading, setLoading] = useState(true);
     const { socket } = useSocket();
 
+    const [playerMove, setPlayerMove] = useState<JSON>();
+    const [robotMove, setRobotMove] = useState<JSON>();
+
     let moves = "1.d4 Nc6 2. e4 e6 3. Nf3 Nf6 4. Bd3 d5 5. e5 Nd7 6. O-O b6 7. Bg5 f6 8. exf6 gxf6 9. Bh4 Qe7 10. Re1 Bb7 11. Nc3 O-O-O 12. Nxd5 Qg7 13. Rxe6 Nxd4 14. Nxd4 Bxd5 15. Bf1 Rg8 16. Bg3 Bxe6 17. Ba6+ Kb8 18. Nc6+ Ka8 19. Nxd8 Bd6 20. Qf3+ Kb8 21. Qb7# 1-0"
 
+
+
+    //<============ UseEffect HELL =============>
     useEffect(() => {
         const savedPieceColor = localStorage.getItem('pieceColor');
         if (savedPieceColor) {
@@ -30,7 +36,7 @@ const Game = () => {
             setIsPlayerTurn(savedPieceColor === 'white');
         }
         setLoading(false);
-    }, [setPieceColor]);
+    }, [pieceColor]);
 
     useEffect(() => {
         if (isPlayerTurn) {
@@ -40,24 +46,55 @@ const Game = () => {
         }
     }, [isPlayerTurn]);
 
+    //useEffect for getting the difficulty
     useEffect(() => {
         try {
-            socket?.emit('getDifficulty');
-            socket?.on('getDifficulty', (difficulty) => {
+            if(socket){
+            socket.emit('getDifficulty');
+            socket.on('getDifficulty', (difficulty) => {
                 const capitalizedDifficulty = capitalizeFirstLetter(difficulty);
                 setDifficulty(capitalizedDifficulty);
                 localStorage.setItem('difficulty', capitalizedDifficulty);
-            });
+            });}
         } catch (error) {
             console.log(error);
         }
     }, [socket]);
+
+    //useEffect for getting the moves done on the board
+    useEffect(() => {
+        try {
+            if (socket) {
+                const handlePlayerMove = (PlayerMoveJSON : JSON) => {
+                    setPlayerMove(PlayerMoveJSON);
+                };
+    
+                const handleRobotMove = (RobotMoveJSON : JSON) => {
+                    setRobotMove(RobotMoveJSON);
+                };
+    
+                socket.on('playerMove', handlePlayerMove);
+                socket.on('robotMove', handleRobotMove);
+                
+                return () => {
+                    socket.off('playerMove', handlePlayerMove);
+                    socket.off('robotMove', handleRobotMove);
+                };
+            }
+        }
+        catch (error) {
+            
+        }
+    },[socket])
 
     useEffect(() => {
         if (pieceColor) {
             localStorage.setItem('pieceColor', pieceColor);
         }
     }, [pieceColor]);
+    //<===========================================>
+
+    
 
     const handleConfirmMove = async () => {
         if (isValid) {
