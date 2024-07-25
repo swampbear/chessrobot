@@ -146,26 +146,34 @@ html, body {
     justify-content: space-between;
     width: 90%;
     max-width: 400px;
+    gap: 5rem;
 }
 
 .resign-button, 
 .confirm-button {
     width: 48%;
     padding: 10px;
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 1.4rem;
+    font-weight: 500;
     border: none;
-    border-radius: 15px;
+    border-radius: 10px;
     cursor: pointer;
     color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.712);
+}
+
+.confirm-button:disabled,
+.resign-button:disabled {
+    background-color: #c8bfbe;
+    cursor: not-allowed;
 }
 
 .resign-button {
-    background-color: #F24E1E;
+    background-color: #c13a11;
 }
 
 .confirm-button {
-    background-color: #28a745;
+    background-color: #366b42;
 }
 
 /* Responsive Design */
@@ -197,8 +205,5 @@ html, body {
         font-size: 1.2rem;
     }
 
-    .resign-button, 
-    .confirm-button {
-        font-size: 1.5rem;
-    }
+   
 }

@@ -61,7 +61,11 @@ const Chessboard = ({dgtBoardFEN}: ChessboardProps) => {
         }
         drawCoordinateAxis(isPlayingWhite, vertical, horizontal, setFrameHorizontal, setFrameVertical);
         drawPieces(isPlayingWhite, boardFen, setPieces, setBoardFEN);
-    },[isPlayingWhite]);
+    },[isPlayingWhite, boardFen]);
+
+    useEffect (()=> {
+       setBoardFEN(dgtBoardFEN)
+    },[dgtBoardFEN])
     
 
     // Render the board

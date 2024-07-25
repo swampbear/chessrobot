@@ -54,9 +54,7 @@ const BoardConfig = () => {
     function handleStartGameClick(){
         try {
             if(isValid){
-                //TODO implemnt routing to game page
                 navigate('/game');
-
                 toast.success("Everything is set up correctly")
             } else{
                 toast.error("The board is not set up correctly. Make sure that all peices are placed in ther correct place, at the correct row and column.")
