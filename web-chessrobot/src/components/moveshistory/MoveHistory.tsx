@@ -1,14 +1,15 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { Chess } from 'chess.js';
 import './MoveHistory.css';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight, MdOutlineKeyboardArrowRight,MdOutlineKeyboardDoubleArrowLeft,MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight, MdOutlineKeyboardDoubleArrowLeft, MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 
 type MoveHistoryProps = {
     pgn: string;
     setHistoryIndexFEN: Dispatch<SetStateAction<string>>;
+    setIsShowingHistoryMove: Dispatch<SetStateAction<boolean>>;
 };
 
-const MoveHistory: React.FC<MoveHistoryProps> = ({ pgn, setHistoryIndexFEN}) => {
+const MoveHistory = ({ pgn, setHistoryIndexFEN, setIsShowingHistoryMove } : MoveHistoryProps ) => {
     const [currentDgtPGN, setCurrentDgtPGN] = useState<string>("");
     const [moves, setMoves] = useState<string[]>([]);
     const [fens, setFens] = useState<string[]>([]);
@@ -17,10 +18,10 @@ const MoveHistory: React.FC<MoveHistoryProps> = ({ pgn, setHistoryIndexFEN}) => 
     const parsePgnToMovesAndFens = (pgn: string) => {
         const chess = new Chess();
         chess.loadPgn(pgn);
-        setCurrentDgtPGN(chess.fen())
+        setCurrentDgtPGN(chess.fen());
         const moves = chess.history({ verbose: true });
         const fens = moves.map((move, index) => {
-            chess.undo()
+            chess.undo();
             return chess.fen();
         });
         fens.reverse();
@@ -43,41 +44,45 @@ const MoveHistory: React.FC<MoveHistoryProps> = ({ pgn, setHistoryIndexFEN}) => 
 
     const handleRewind = () => {
         if (currentMoveIndex > 0) {
+            setIsShowingHistoryMove(true);
             const newIndex = currentMoveIndex - 1;
             setCurrentMoveIndex(newIndex);
-            setHistoryIndexFEN(fens[newIndex]);
+            setHistoryIndexFEN(fens[newIndex].split(' ')[0]);
         }
     };
     const handleFastRewind = () => {
         if (currentMoveIndex > 0) {
-            const newIndex = 0
-            setCurrentMoveIndex(0)
-            setHistoryIndexFEN(fens[newIndex]);
+            setIsShowingHistoryMove(true);
+            const newIndex = 0;
+            setCurrentMoveIndex(newIndex);
+            setHistoryIndexFEN(fens[newIndex].split(' ')[0]);
         }
     }
 
     const handleForward = () => {
-        if (currentMoveIndex < moves.length-1) {
+        if (currentMoveIndex < moves.length - 1) {
             const newIndex = currentMoveIndex + 1;
             setCurrentMoveIndex(newIndex);
-            setHistoryIndexFEN(fens[newIndex]);
-            }
-        else{
+            setHistoryIndexFEN(fens[newIndex].split(' ')[0]);
+            setIsShowingHistoryMove(true);
+        } else {   
             setCurrentMoveIndex(prev => prev + 1);
-            setHistoryIndexFEN(currentDgtPGN)
+            setHistoryIndexFEN(currentDgtPGN);
+            setIsShowingHistoryMove(false);
         }
     };
 
     const handleFastForward = () => {
+        setIsShowingHistoryMove(false);
         setCurrentMoveIndex(moves.length);
-        setHistoryIndexFEN(currentDgtPGN)
+        setHistoryIndexFEN(currentDgtPGN);
     }
 
     return (
         <>
-        <div className="move-history-container">
-            <h2>Move History</h2>
-            <pre className="pgn-display">
+            <div className="move-history-container">
+                <h2>Move History</h2>
+                <pre className="pgn-display">
                     {moves.map((move, index) => (
                         <span key={index} >
                             {index % 2 === 0 ? `${index / 2 + 1}. ` : ''}
@@ -87,13 +92,12 @@ const MoveHistory: React.FC<MoveHistoryProps> = ({ pgn, setHistoryIndexFEN}) => 
                         </span>
                     ))}
                 </pre>
-        </div>
+            </div>
             <div className="controls">
                 <button onClick={handleFastRewind} disabled={currentMoveIndex === 0}> <MdOutlineKeyboardDoubleArrowLeft className='icon'/></button>
                 <button onClick={handleRewind} disabled={currentMoveIndex === 0}><MdKeyboardArrowLeft className='icon'/></button>
                 <button onClick={handleForward} disabled={currentMoveIndex === moves.length}><MdKeyboardArrowRight className='icon'/></button>
                 <button onClick={handleFastForward} disabled={currentMoveIndex === moves.length}> <MdOutlineKeyboardDoubleArrowRight className='icon'/></button>
-
             </div>
         </>
     );
