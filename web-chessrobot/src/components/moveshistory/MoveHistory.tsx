@@ -8,7 +8,13 @@ type MoveHistoryProps = {
     setHistoryIndexFEN: Dispatch<SetStateAction<string>>;
     setIsShowingHistoryMove: Dispatch<SetStateAction<boolean>>;
 };
-
+/**
+ * Responisble for take in movehistory as pgn and setHistoryIndex and if the move history chould be displayed or not
+ * @param pgn
+ * @param setHistorIndexFEN
+ * @param setIsShowingHistoryMove 
+ * @returns MoveHistory JSX object
+ */
 const MoveHistory = ({ pgn, setHistoryIndexFEN, setIsShowingHistoryMove } : MoveHistoryProps ) => {
     const [currentDgtPGN, setCurrentDgtPGN] = useState<string>("");
     const [moves, setMoves] = useState<string[]>([]);

@@ -66,7 +66,8 @@ export const drawPieces = (
         if (isPlayingWhite) {
             setUpPositionFromFEN(currentBoardFEN, setPieces, setCurrentBoardFEN);
         } else {
-            const reverseFen = currentBoardFEN.split('').reverse().join('');
+            var boardPosOnly = currentBoardFEN.split(' ')[0]
+            const reverseFen = boardPosOnly.split('').reverse().join('');
             setUpPositionFromFEN(reverseFen, setPieces, setCurrentBoardFEN,);
         }
     } catch (error) {
@@ -82,6 +83,7 @@ export const setUpPositionFromFEN = (
     try {
         const fen = FEN;
         const rows = fen.split('/');
+
         const pieces: Piece[] = [];
         
         for(let i = 0; i<rows.length; i++){
@@ -91,6 +93,7 @@ export const setUpPositionFromFEN = (
                 const char = row[j];
                 if(isNaN(parseInt(char))){
                     let isLowerCase = char === char.toLowerCase();
+                 
                     if(isLowerCase){
                         pieces.push({image: `./assets/images/Chess_${char}dt60.png`, x, y: 7 - i})
                     }
@@ -103,8 +106,8 @@ export const setUpPositionFromFEN = (
                     x += parseInt(char);
                 }
             }
-        }
-        setPieces(pieces);
+            }
+        setPieces(pieces); 
         setCurrentBoardFEN(FEN)    
 
     } catch (error) {

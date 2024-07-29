@@ -63,11 +63,6 @@ const Chessboard = ({dgtBoardFEN}: ChessboardProps) => {
         drawPieces(isPlayingWhite, boardFen, setPieces, setBoardFEN);
     },[isPlayingWhite, dgtBoardFEN]);
 
-    useEffect (()=> {
-       setBoardFEN(dgtBoardFEN)
-    },[dgtBoardFEN])
-    
-
     // Render the board
     return (
         <div id='container'>

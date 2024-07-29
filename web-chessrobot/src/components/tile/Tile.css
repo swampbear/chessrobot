@@ -1,8 +1,6 @@
 
 
 :root {
-    --dark: #24227E;
-    --light: aliceblue;
     --tile-size: 60px; /* Default tile size */
 }
 
@@ -14,11 +12,11 @@
 }
 
 .black-tile {
-    background-color: var(--dark);
+    background-color: #22376b;
 }
 
 .white-tile {
-    background-color: var(--light);
+    background-color: aliceblue;
 }
 
 .tile .chess-piece:hover {
@@ -39,7 +37,11 @@
 /* Responsive Design */
 @media (min-width: 480px) {
     :root {
-        --tile-size: 40px; /* Increase tile size for larger screens */
+        --tile-size: 60px; /* Increase tile size for larger screens */
+    }
+    .tile .chess-piece{
+        width: 3.5em;
+        height: 3.5rem;
     }
 }
 
@@ -51,7 +53,7 @@
 
 @media (min-width: 1024px) {
     :root {
-        --tile-size: 70px; /* Max tile size for large screens */
+        --tile-size: 4.5rem; /* Max tile size for large screens */
     }
 
     .tile .chess-piece{

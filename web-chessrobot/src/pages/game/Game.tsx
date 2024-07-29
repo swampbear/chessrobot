@@ -10,7 +10,10 @@ import { ToastContainer } from "react-toastify";
 import {motion} from "framer-motion"
 import MoveHistory from "../../components/moveshistory/MoveHistory";
 
-
+/**
+ * 
+ * @returns Game page as JSX Element
+ */
 const Game = () => {
     const { pieceColor, setPieceColor } = usePieceColor();
     const [isPlayerTurn, setIsPlayerTurn] = useState(true);
@@ -105,13 +108,17 @@ const Game = () => {
     
 
     const handleConfirmMove = async () => {
-        if (true) { //PlayerMove.isLegal && isPlayerTurn
+        if (playerMove && isPlayerTurn) { //PlayerMove.isLegal && isPlayerTurn
             console.log(isShowingHistoryMove)
             setIsPlayerTurn(false);
             await new Promise(r => setTimeout(r, 3000));
             setIsPlayerTurn(true);
         }
     };
+
+    const handleResignPress = () => {
+        
+    }
 
     if (loading) {
         return (
@@ -145,7 +152,7 @@ const Game = () => {
                     </div>
                     <div id="chessboard-container">   
                     <ErrorBoundary fallback="Error loading the chessboard">
-                        <Chessboard key={isShowingHistoryMove ? historyIndexFEN : dgtBoardFEN} dgtBoardFEN={isShowingHistoryMove ? historyIndexFEN : dgtBoardFEN} />
+                        <Chessboard key={isShowingHistoryMove ? `history-${historyIndexFEN}` : `current-${dgtBoardFEN}`} dgtBoardFEN={isShowingHistoryMove ? historyIndexFEN : dgtBoardFEN} />                    
                     </ErrorBoundary>
                     </div>
                     <div id="player-info">
