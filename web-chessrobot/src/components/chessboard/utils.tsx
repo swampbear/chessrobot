@@ -107,8 +107,11 @@ export const setUpPositionFromFEN = (
                 }
             }
             }
+        if(pieces.length>1){
         setPieces(pieces); 
         setCurrentBoardFEN(FEN)    
+        }
+        
 
     } catch (error) {
         console.error("Error trying to set up position from FEN",error);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import Header from '../../components/header/Header';
 import { Footer } from '../../components/footer/Footer';
 import { usePieceColor } from "../../contextproviders/pieceColor/PieceColorContext";
@@ -10,9 +10,15 @@ import { ToastContainer } from "react-toastify";
 import {motion} from "framer-motion"
 import MoveHistory from "../../components/moveshistory/MoveHistory";
 
+
+interface Move {
+    pgn: string;
+    fen: string;
+    isLegal: boolean;
+}
 /**
  * 
- * @returns Game page as JSX Element
+ * @returns JSX.Element Game page
  */
 const Game = () => {
     const { pieceColor, setPieceColor } = usePieceColor();
@@ -26,10 +32,16 @@ const Game = () => {
 
     const [isShowingHistoryMove, setIsShowingHistoryMove] = useState<boolean>(false)
     
-    const [dgtBoardFEN, setDgtBoardFEN] = useState<string>("1k1N2r1/pQpn2qp/Bp1bbp2/8/8/6B1/PPP2PPP/R5K1");
-    const [movesPGN, setMovesPGN] = useState<string>("11. e4 e5 2. Nf3 Nc6 3. Bb5 3. a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3 Nb8 10. d4 Nbd7 11. c4 c6 12. cxb5 axb5 13. Nc3 Bb7 14. Bg5 b4 15. Nb1 h6 16. Bh4 c5 17. dxe5 Nxe4 18. Bxe7 Qxe7 19. exd6 Qf6 20. Nbd2 Nxd6 21. Nc4 Nxc4 22. Bxc4 Nb6 23. Ne5 Rae8 24. Bxf7+ Rxf7 25. Nxf7 Rxe1+ 26. Qxe1 Kxf7 27. Qe3 Qg5 28. Qxg5 hxg5 29. b3 Ke6 30. a3 Kd6 31. axb4 cxb4 32. Ra5 Nd5 33. f3 Bc8 34. Kf2 Bf5 35. Ra7 g6 36. Ra6+ Kc5 37. Ke1 Nf4 38. g3 Nxh3 39. Kd2 Kb5 40. Rd6 Kc5 41. Ra6 Nf2 42. g4 Bd3 43. Re6 1/2-1/2")
-    const [playerMove, setPlayerMove] = useState<JSON>();
-    const [robotMove, setRobotMove] = useState<JSON>();
+    const [dgtBoardFEN, setDgtBoardFEN] = useState<string>("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
+    const [movesPGN, setMovesPGN] = useState<string>("")
+    const initialMove: Move = {
+        pgn: "",
+        fen: "",
+        isLegal: false
+    };
+
+    const [playerMove, setPlayerMove] = useState<Move>(initialMove);
+    const [robotMove, setRobotMove] = useState<Move>(initialMove);
     
     const [loading, setLoading] = useState(true);
     const { socket } = useSocket();
@@ -50,13 +62,19 @@ const Game = () => {
     }, [historyIndexFEN, isShowingHistoryMove]);
 
     useEffect(() => {
+        if(playerMove.fen !== ""){
+            setDgtBoardFEN(playerMove.fen);
+            setMovesPGN(playerMove.pgn)
+        }
+    }, [playerMove]);
+
+    useEffect(() => {
         if (isPlayerTurn) {
             setStatusMessage("Your move!");
         } else {
             setStatusMessage("Robot's move! Keep your hand off the board, or it will get very angry.");
         }
     }, [isPlayerTurn]);
-
     //useEffect for getting the difficulty
     useEffect(() => {
         try {
@@ -76,14 +94,19 @@ const Game = () => {
     useEffect(() => {
         try {
             if (socket) {
-                const handlePlayerMove = (PlayerMoveJSON : JSON) => {
+                const handlePlayerMove = (PlayerMoveJSON : Move) => {
                     setPlayerMove(PlayerMoveJSON);
+
+                    console.log(PlayerMoveJSON)
                 };
     
-                const handleRobotMove = (RobotMoveJSON : JSON) => {
+                const handleRobotMove = (RobotMoveJSON : Move) => {
                     setRobotMove(RobotMoveJSON);
                 };
-    
+                if(socket){
+                    socket.emit('playerMoveTest')
+                }
+
                 socket.on('playerMove', handlePlayerMove);
                 socket.on('robotMove', handleRobotMove);
                 
@@ -132,6 +155,13 @@ const Game = () => {
         );
     }
 
+    const renderChessboard = () => (
+                <ErrorBoundary fallback="Error loading the chessboard">
+                    <Chessboard key={isShowingHistoryMove ? `history-${historyIndexFEN}` : `current-${dgtBoardFEN}`} dgtBoardFEN={isShowingHistoryMove ? historyIndexFEN : dgtBoardFEN} />
+                </ErrorBoundary>
+
+    );
+
     return (
         <motion.div id="header-container" className="gradientBackground"
         initial={{opacity: 0}}
@@ -151,9 +181,7 @@ const Game = () => {
                         </div>
                     </div>
                     <div id="chessboard-container">   
-                    <ErrorBoundary fallback="Error loading the chessboard">
-                        <Chessboard key={isShowingHistoryMove ? `history-${historyIndexFEN}` : `current-${dgtBoardFEN}`} dgtBoardFEN={isShowingHistoryMove ? historyIndexFEN : dgtBoardFEN} />                    
-                    </ErrorBoundary>
+                        {renderChessboard()}
                     </div>
                     <div id="player-info">
                         <div id="player-avatar" className="avatar">
@@ -172,7 +200,7 @@ const Game = () => {
                     </div>
                     <div id="buttons-container">
                         <button className="confirm-button" disabled={!isPlayerTurn} onClick={handleConfirmMove}>CONFIRM MOVE</button>
-                        <button className="resign-button" disabled={!isPlayerTurn}>RESIGN</button>
+                        <button className="resign-button" disabled={!isPlayerTurn} onClick={handleResignPress}>RESIGN</button>
 
                     </div>
                 </div>
