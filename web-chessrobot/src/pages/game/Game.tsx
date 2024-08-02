@@ -109,7 +109,9 @@ const Game = () => {
 
                 socket.on('playerMove', handlePlayerMove);
                 socket.on('robotMove', handleRobotMove);
-                
+                socket.on('disconnect', () => {
+                    console.log('Disconnected from server')
+                })
                 return () => {
                     socket.off('playerMove', handlePlayerMove);
                     socket.off('robotMove', handleRobotMove);
@@ -129,10 +131,15 @@ const Game = () => {
     //<===========================================>
 
     
-
+    /**
+     * Confirms the users move if the move was legal.
+     * Then sets players turn to false which disables confirmation 
+     * and resignbutton for user.
+     * Emits message to socket that move have been confirmed.
+     */
     const handleConfirmMove = async () => {
-        if (playerMove && isPlayerTurn) { //PlayerMove.isLegal && isPlayerTurn
-            console.log(isShowingHistoryMove)
+        if (playerMove.isLegal && isPlayerTurn) { 
+            setIsShowingHistoryMove(false)
             setIsPlayerTurn(false);
             await new Promise(r => setTimeout(r, 3000));
             setIsPlayerTurn(true);
@@ -154,7 +161,7 @@ const Game = () => {
             </div>
         );
     }
-
+    
     const renderChessboard = () => (
                 <ErrorBoundary fallback="Error loading the chessboard">
                     <Chessboard key={isShowingHistoryMove ? `history-${historyIndexFEN}` : `current-${dgtBoardFEN}`} dgtBoardFEN={isShowingHistoryMove ? historyIndexFEN : dgtBoardFEN} />

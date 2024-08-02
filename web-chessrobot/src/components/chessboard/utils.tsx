@@ -2,39 +2,31 @@ import React from 'react';
 import Tile from '../tile/Tile';
 import { Piece } from './Piece';
 
-export const createBoard = (
-    pieces: Piece[],
-    vertical: number[],
-    horizontal: string[]
-) => {
+export const createBoard = (pieces: Piece[], previousPieces: { [key: string]: string }) => {
     const board = [];
-        for (let i = vertical.length - 1; i >= 0; i--) {
-          for (let j = 0; j < horizontal.length; j++) {
-            const number = i + j + 2;
-            let image = undefined;
-            pieces.forEach((p) => {
-              let pieceInPosition = p.x === j && p.y === i;
-              if (pieceInPosition) {
-                image = p.image;
-              }
-            });
-            board.push(<Tile key={`${j}, ${i}`} image={image} number={number} />);
-          }
+        for (let i = 8 - 1; i >= 0; i--) {
+            for (let j = 0; j < 8; j++) {
+                const number = i + j + 2;
+                const positionKey = `${j},${i}`;
+                const image = previousPieces[positionKey];
+                board.push(<Tile key={positionKey} image={image} number={number} />);
+            }
         }
         return board;
-}
+    };
 
 
 export const drawCoordinateAxis = (
     isPlayingWhite: boolean,
-    vertical: number[],
-    horizontal: string[],
     setFrameHorizontal: React.Dispatch<React.SetStateAction<JSX.Element[]>>,
     setFrameVertical: React.Dispatch<React.SetStateAction<JSX.Element[]>>
 ) => {
     try {
         const frameHorizontal: JSX.Element[] = [];
         const frameVertical: JSX.Element[] = [];
+
+        let horizontal = ['h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'];
+        let vertical = [8,7,6,5,4,3,2,1];
 
         if (!isPlayingWhite) {
             if (vertical[0] !== 1) vertical.reverse();
@@ -66,9 +58,9 @@ export const drawPieces = (
         if (isPlayingWhite) {
             setUpPositionFromFEN(currentBoardFEN, setPieces, setCurrentBoardFEN);
         } else {
-            var boardPosOnly = currentBoardFEN.split(' ')[0]
-            const reverseFen = boardPosOnly.split('').reverse().join('');
-            setUpPositionFromFEN(reverseFen, setPieces, setCurrentBoardFEN,);
+            const boardPosOnly = currentBoardFEN.split(' ')[0];
+            const reversedRows = boardPosOnly.split('/').reverse().map(row => row.split('').reverse().join('')).join('/');
+            setUpPositionFromFEN(reversedRows, setPieces, setCurrentBoardFEN);
         }
     } catch (error) {
         console.error(error);
@@ -81,42 +73,30 @@ export const setUpPositionFromFEN = (
     setCurrentBoardFEN: React.Dispatch<React.SetStateAction<string>>
 ) => {
     try {
-        const fen = FEN;
-        const rows = fen.split('/');
-
+        const rows = FEN.split('/');
         const pieces: Piece[] = [];
-        
-        for(let i = 0; i<rows.length; i++){
-            const row = rows[i];
+
+        rows.forEach((row, i) => {
             let x = 0;
-            for(let j = 0; j<row.length; j++){
-                const char = row[j];
-                if(isNaN(parseInt(char))){
-                    let isLowerCase = char === char.toLowerCase();
-                 
-                    if(isLowerCase){
-                        pieces.push({image: `./assets/images/Chess_${char}dt60.png`, x, y: 7 - i})
-                    }
-                    else {
-                        const lightChar = char.toLowerCase();
-                        pieces.push({image: `./assets/images/Chess_${lightChar}lt60.png`, x, y: 7 - i})
-                    }
+            for (const char of row) {
+                const num = parseInt(char);
+                if (isNaN(num)) {
+                    const piece = char.toLowerCase();
+                    const isWhite = char === char.toUpperCase();
+                    const image = `./assets/images/Chess_${piece}${isWhite ? 'lt60.png' : 'dt60.png'}`;
+                    pieces.push({ image, x, y: 7 - i });
                     x++;
                 } else {
-                    x += parseInt(char);
+                    x += num;
                 }
             }
-            }
-        if(pieces.length>1){
+        });
         setPieces(pieces); 
-        setCurrentBoardFEN(FEN)    
-        }
-        
-
+        setCurrentBoardFEN(FEN);  
     } catch (error) {
-        console.error("Error trying to set up position from FEN",error);
+        console.error("Error trying to set up position from FEN", error);
     }
-}
+};
 
 export const getFENFromPosition = (pieces: Piece[]) => {
     let fen = '';
