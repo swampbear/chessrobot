@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction, useRef } from 'react';
 import { Chess } from 'chess.js';
 import './MoveHistory.css';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight, MdOutlineKeyboardDoubleArrowLeft, MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
@@ -20,6 +20,8 @@ const MoveHistory = ({ pgn, setHistoryIndexFEN, setIsShowingHistoryMove } : Move
     const [moves, setMoves] = useState<string[]>([]);
     const [fens, setFens] = useState<string[]>([]);
     const [currentMoveIndex, setCurrentMoveIndex] = useState<number>(1);
+
+    const selectedMoveRef = useRef<HTMLSpanElement | null>(null);
 
     const parsePgnToMovesAndFens = (pgn: string) => {
         const chess = new Chess();
@@ -45,6 +47,9 @@ const MoveHistory = ({ pgn, setHistoryIndexFEN, setIsShowingHistoryMove } : Move
     useEffect(() => {
         if (fens && fens.length > 0) {
             setHistoryIndexFEN(fens[currentMoveIndex]);
+        }
+        if (selectedMoveRef.current) {
+            selectedMoveRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }, [currentMoveIndex, fens]);
 
@@ -86,24 +91,33 @@ const MoveHistory = ({ pgn, setHistoryIndexFEN, setIsShowingHistoryMove } : Move
 
     return (
         <>
-            <div className="move-history-container">
+             <div className="move-history-container">
                 <h2>Move History</h2>
                 <pre className="pgn-display">
                     {moves.map((move, index) => {
                         if (index % 2 === 0) {
                             return (
-                                <span key={index} className="move-pair">
-                                    {`${index / 2 + 1}. `}
-                                    <span className={currentMoveIndex - 1 === index ? 'current-move' : ''}>
-                                        {move}
-                                    </span>
-                                    {index + 1 < moves.length && (
-                                        <span className={currentMoveIndex - 1 === index + 1 ? 'current-move' : ''}>
-                                            {` ${moves[index + 1]}`}
+                                <section key={index} className="move-section">
+                                    <div className="move-pair">
+                                        <span className="move-number">{`${index / 2 + 1}.`}</span>
+                                        <span
+                                            ref={currentMoveIndex - 1 === index ? selectedMoveRef : null}
+                                            className={`move ${currentMoveIndex - 1 === index ? 'current-move' : ''}`}
+                                        >
+                                            {move}
                                         </span>
+                                    </div>
+                                    {index + 1 < moves.length && (
+                                        <div className="move-pair-right">
+                                            <span
+                                                ref={currentMoveIndex - 1 === index + 1 ? selectedMoveRef : null}
+                                                className={`move ${currentMoveIndex - 1 === index + 1 ? 'current-move' : ''}`}
+                                            >
+                                                {moves[index + 1]}
+                                            </span>
+                                        </div>
                                     )}
-                                    <br />
-                                </span>
+                                </section>
                             );
                         }
                         return null;

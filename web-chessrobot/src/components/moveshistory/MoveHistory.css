@@ -73,7 +73,26 @@
     background: #555; 
 }
 
+.move-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
 
+.move-pair {
+    display: flex;
+    align-items: center;
+}
+
+.move-number {
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.move {
+    display: inline-block;
+}
 .current-move {
     color: #ff0800;
     font-weight: 800;
