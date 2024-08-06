@@ -89,14 +89,25 @@ const MoveHistory = ({ pgn, setHistoryIndexFEN, setIsShowingHistoryMove } : Move
             <div className="move-history-container">
                 <h2>Move History</h2>
                 <pre className="pgn-display">
-                    {moves.map((move, index) => (
-                        <span key={index} >
-                            {index % 2 === 0 ? `${index / 2 + 1}. ` : ''}
-                            <span className={currentMoveIndex - 1 === index ? 'current-move' : ''}>
-                                {move + ' '}
-                            </span>
-                        </span>
-                    ))}
+                    {moves.map((move, index) => {
+                        if (index % 2 === 0) {
+                            return (
+                                <span key={index} className="move-pair">
+                                    {`${index / 2 + 1}. `}
+                                    <span className={currentMoveIndex - 1 === index ? 'current-move' : ''}>
+                                        {move}
+                                    </span>
+                                    {index + 1 < moves.length && (
+                                        <span className={currentMoveIndex - 1 === index + 1 ? 'current-move' : ''}>
+                                            {` ${moves[index + 1]}`}
+                                        </span>
+                                    )}
+                                    <br />
+                                </span>
+                            );
+                        }
+                        return null;
+                    })}
                 </pre>
             </div>
             <div className="controls">
