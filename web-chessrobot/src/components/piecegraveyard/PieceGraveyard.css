@@ -1,0 +1,18 @@
+.piece-graveyard {
+    position: relative;
+    width: 500px;  /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
+    margin-bottom: .1rem;
+}
+
+.piece-stack {
+    position: absolute;
+    margin-right: 20px; /* Space between different types of pieces */
+    background-color: black;
+}
+
+.captured-piece {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+}

@@ -53,11 +53,11 @@
 
 @media (min-width: 1024px) {
     :root {
-        --tile-size: 4.5rem; /* Max tile size for large screens */
+        --tile-size: 4.4rem; /* Max tile size for large screens */
     }
 
     .tile .chess-piece{
-        width: 4.5em;
-        height: 4.5rem;
+        width: 4.2em;
+        height: 4.2rem;
     }
 }

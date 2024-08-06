@@ -9,6 +9,7 @@ import ErrorBoundary from "../../ErrorBoundary";
 import { ToastContainer } from "react-toastify";
 import {motion} from "framer-motion"
 import MoveHistory from "../../components/moveshistory/MoveHistory";
+import PieceGraveyard from "../../components/piecegraveyard/PieceGraveyard";
 
 
 interface Move {
@@ -29,7 +30,6 @@ const Game = () => {
         const savedDifficulty = localStorage.getItem('difficulty');
         return savedDifficulty ? savedDifficulty : '';
     });
-
     const [isShowingHistoryMove, setIsShowingHistoryMove] = useState<boolean>(false)
     
     const [dgtBoardFEN, setDgtBoardFEN] = useState<string>("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
@@ -103,10 +103,8 @@ const Game = () => {
                 const handleRobotMove = (RobotMoveJSON : Move) => {
                     setRobotMove(RobotMoveJSON);
                 };
-                if(socket){
-                    socket.emit('playerMoveTest')
-                }
-
+                socket.emit('playerMoveTest')
+                
                 socket.on('playerMove', handlePlayerMove);
                 socket.on('robotMove', handleRobotMove);
                 socket.on('disconnect', () => {
@@ -150,6 +148,8 @@ const Game = () => {
         
     }
 
+    
+
     if (loading) {
         return (
             <div id="header-container" className="gradientBackground">
@@ -183,8 +183,8 @@ const Game = () => {
                             <img src="./assets/images/robotics_logo.jpg" alt="Opponent Avatar" />
                         </div>
                         <div className="opponent-details">
-                            <h2>CHESS ROBOT</h2>
-                            <p style={{ fontSize: '1rem' }}>{difficulty} difficulty</p>
+                            <h2>CHESS ROBOT {difficulty}</h2>
+                            <PieceGraveyard key={dgtBoardFEN} pieceColor={pieceColor === 'white' ? 'white' : 'black'} fen={isShowingHistoryMove ? historyIndexFEN : dgtBoardFEN} />
                         </div>
                     </div>
                     <div id="chessboard-container">   
@@ -196,7 +196,7 @@ const Game = () => {
                         </div>
                         <div className="player-details">
                             <h2>YOU</h2>
-                            <p>Mortal</p>
+                            <PieceGraveyard key={dgtBoardFEN} pieceColor={pieceColor === 'white' ? 'black' : 'white'} fen={isShowingHistoryMove ? historyIndexFEN : dgtBoardFEN} />
                         </div>
                     </div>
                 </div>

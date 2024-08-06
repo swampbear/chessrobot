@@ -56,15 +56,14 @@ html, body {
 #player-info {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .avatar {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     background-color: #fff;
-    margin-right: 15px;
+    margin-right: 10px;
     overflow: hidden; 
 }
 
@@ -77,22 +76,14 @@ html, body {
 .opponent-details, 
 .player-details {
     text-align: left;
-    font-size: 1.2rem;
+
 }
 
 
 .opponent-details h2,
 .player-details h2 {
     margin-bottom: 0;
-    padding: 0;
-    font-size: 1.3em;
-}
-
-.opponent-details p,
-.player-details p {
-    margin-top: 0; /* Remove the top margin */
-    padding: 0; /* Remove any default padding */
-    font-size: 1rem;
+    font-size: 1.2em;
 }
 
 #chessboard-container {
