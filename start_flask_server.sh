@@ -3,7 +3,7 @@
 # Define the path to the Flask server
 FLASK_SERVER_PATH="./flask-server"
 FLASK_APP="app.py"
-FLASK_SERVER_PORT=8080-
+FLASK_SERVER_PORT=8080
 
 # Check and kill any process using the port
 fuser -k $FLASK_SERVER_PORT/tcp
