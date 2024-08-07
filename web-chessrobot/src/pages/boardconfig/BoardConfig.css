@@ -1,6 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap');
 
-
+/* Global Styles */
+:root {
+    --dark: #24227E;
+    --light: aliceblue;
+    --button-bg: #4285F4;
+    --button-hover-bg: #c8bfbe;
+    --button-text: #ffffff;
+    --button-border: #ffffff;
+    --easy-bg: #28a745;
+    --medium-bg: #ffc107;
+    --hard-bg: #dc3545;
+    --white-bg: #ffffff;
+    --black-bg: #000000;
+    --white-text: #000000;
+    --border-radius: 100px;
+}
 
 /* For Webkit browsers (Chrome, Safari, etc.) */
 ::-webkit-scrollbar {
@@ -9,12 +24,19 @@
     background: transparent;
 }
 
+/* Basic Elements */
 p {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
+    margin-bottom: 1em;
 }
 
+h2 {
+    font-size: 2.7em;
+    margin-bottom: 0.5em;
+}
+
+/* Layout */
 #header-container {
-    padding: 0 5%;
     text-align: center;
 }
 
@@ -23,7 +45,7 @@ p {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 81dvh;
+    padding: 0 5%;
 }
 
 #chessboard-area {
@@ -35,7 +57,6 @@ p {
 }
 
 #chessboard-container {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,12 +64,6 @@ p {
     width: 100%;
     aspect-ratio: 1 / 1;
     font-size: 2rem;
-    font-weight: 700;
-}
-
-#robot-label,
-#you-label {
-    font-size: 1.5rem;
     font-weight: 700;
 }
 
@@ -61,33 +76,27 @@ p {
     box-sizing: border-box;
 }
 
-#info-container h2 {
-    margin-bottom: 0.5em;
-    font-size: 3em;
-}
-
-#info-container p {
-    margin-bottom: 1em;
-    font-size: 2.3em;
-}
-
+/* Button Styles */
 #start-game-button {
-    background-color: transparent;
-    border-radius: 30px;
-    padding: 10px 20px;
-    color: #fff;
-    font-size: 2.5rem;
-    font-weight: 700;
-    border: 4px solid #fff;
+    background-color: #f24f1eb7;
+    color: white;
+    padding: 10px 50px;
+    font-size: 2.5em;
+    font-weight: 800;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
+    border: none;
+    outline: 3px solid #fff;
+    border-radius: 1em;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.912);
+    transition: background-color 0.3s;
+    margin: 0.5em;
 }
 
 #start-game-button:hover {
-    background-color: #F24E1E;
+    background-color: #852c11;
 }
 
+/* Spinner Styles */
 .spinner {
     width: 40px;
     height: 40px;

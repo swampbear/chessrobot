@@ -11,7 +11,6 @@ import { usePieceColor } from '../../contextproviders/pieceColor/PieceColorConte
 import ErrorBoundary from '../../ErrorBoundary';
 import { motion } from "framer-motion"
 
-
 const BoardConfig = () => {
     const { socket } = useSocket();
     const [isValid, setIsValid] = useState<boolean>(true);
@@ -20,62 +19,59 @@ const BoardConfig = () => {
     const [startFen, setStartFen] = useState('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR')
 
     const navigate = useNavigate();
-    
 
     useEffect(() => {
         function fetchPieceColor() {
             try {
-                if(socket){
-                socket.emit('getColor');
-                socket.on('getColor', (color: string) => {
-                    if(color === ''){
-                        throw new Error('Color cannot be empty')
-                    }
-                    setPieceColor(color);
-                    setLoading(false);
-                });}
+                if (socket) {
+                    socket.emit('getColor');
+                    socket.on('getColor', (color: string) => {
+                        if (color === '') {
+                            throw new Error('Color cannot be empty');
+                        }
+                        setPieceColor(color);
+                        setLoading(false);
+                    });
+                }
             } catch (error) {
                 console.error(error);
-                alert("There has been an error fetching pieceColor from python socket")
+                alert("There has been an error fetching piece color from the socket.");
             }
-            
         }
-        try {
-            fetchPieceColor();
-            return () => {
-                socket?.off('getColor');
-            };
-        } catch (error) {
-            console.error(error)
-        }
-    }, [socket]);
 
+        fetchPieceColor();
 
-    function handleStartGameClick(){
+        return () => {
+            socket?.off('getColor');
+        };
+    }, [socket, setPieceColor]);
+
+    const handleStartGameClick = () => {
         try {
-            if(isValid){
+            if (isValid) {
                 navigate('/game');
-                toast.success("Everything is set up correctly")
-            } else{
-                toast.error("The board is not set up correctly. Make sure that all peices are placed in ther correct place, at the correct row and column.")
+                toast.success("Everything is set up correctly");
+            } else {
+                toast.error("The board is not set up correctly. Make sure all pieces are placed in their correct positions.");
             }
         } catch (error) {
             console.error("Error in navigation operation", error);
             toast.error("There has been an error");
         }
-       
     }
 
     return (
-        <motion.div id="header-container" className="gradientBackground"
-        initial={{opacity: 0}}
-       animate={{opacity: 1}}
-       exit={{opacity: 0}}
+        <motion.div 
+            id="header-container" 
+            className="gradientBackground"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2}}
         >
             <Header />
             <div id="boardconfig">
                 <div id="chessboard-area">
-                    <div id="robot-label">(ROBOT)</div>
                     <div id="chessboard-container">
                         {loading ? (
                             <div className="spinner">
@@ -88,12 +84,11 @@ const BoardConfig = () => {
                             </ErrorBoundary>
                         )}
                     </div>
-                    <div id="you-label">(YOU)</div>
                 </div>
                 <div id="info-container">
-                    <h2>Validate board</h2>
+                    <h2>Validate Board</h2>
                     <p>
-                        You have chosen the {pieceColor} pieces. Make sure the numbers and letters are in the same orientation as on the illustration. Then place the pieces in their correct position. 
+                        You have chosen the {pieceColor} pieces. Make sure the numbers and letters are in the same orientation as on the illustration. Then place the pieces in their correct positions.
                         <br /> <br />
                         Good luck, you are probably going to LOSE.
                     </p>
@@ -104,6 +99,5 @@ const BoardConfig = () => {
         </motion.div>
     );
 };
-
 
 export default BoardConfig;

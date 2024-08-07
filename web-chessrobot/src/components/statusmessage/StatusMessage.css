@@ -1,0 +1,43 @@
+#status-message {
+    color: #343333;
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-width: 5px;
+    height: 25dvh;
+    width: 80%;
+    max-width: 100%;
+    background-color: #ebebeb;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.712);
+}
+
+/* Blinking Animation */
+@keyframes blink {
+    0%, 100% {
+        background-color: #ebebeb;
+    }
+    50% {
+        background-color: #a39389;
+    }
+}
+
+.blink-animation {
+    animation: blink 0.5s steps(5, start) infinite;
+}
+
+/* Fade In Text Animation */
+.fade-in-text {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}

@@ -34,12 +34,13 @@ export default function Home() {
                         <h1>The HVL Robotics <br/>Chess Robot</h1>
                         <p>Challenge the HVL Robotics chess robot. Developed by students, funded by teknoløftet</p>
                         <div className="buttons">
-                            <button className="connect-button" onClick={navigateToSelectionPage}>CONNECT</button>
-                            <button className="github-button">GITHUB</button>
+                            <button className="connect-button" onClick={navigateToSelectionPage}>PLAY CHESS</button>
+                            {/* <button className="github-button">Learn More</button> */}
                         </div>
                     </div>
                     <div className="hero-image">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="210" height="296" viewBox="0 0 210 296" fill="none">
+                        {/* <img src="./assets/images/image.webp" alt="" /> */}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="420" height="692" viewBox="0 0 210 296" fill="none">
                         <path d={gradientPiece}  fill="url(#paint0_linear_4_85)"/>
                             <defs>
                                 <linearGradient id="paint0_linear_4_85" x1="0.929997" y1="280.618" x2="203.238" y2="73.1385" gradientUnits="userSpaceOnUse">
@@ -55,8 +56,10 @@ export default function Home() {
 
                 <div className="learn-more">
                     <h2>Learn More About The Project</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </div>
+                    <p>
+                        Fill inn information, add sections as suited
+                    </p>
+                    </div>
             </div>
         </motion.div>
       

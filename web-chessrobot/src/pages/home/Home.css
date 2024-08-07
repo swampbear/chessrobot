@@ -66,12 +66,12 @@
   
   .hero-section h1 {
     color: white;
-    font-size: 5.5em;
+    font-size: 4.5em;
     margin-bottom: 20px;
   }
   
   .hero-section p {
-    color: white;
+    color: rgb(217, 217, 217);
     font-size: 2.8em;
     margin-bottom: 40px;
   }
@@ -86,22 +86,26 @@
   .connect-button, .github-button {
     padding: 20px 20px;
     font-size: 2.5em;
-    border: none;
+    font-weight: 800;
     cursor: pointer;
-    border-radius: 1.5em;
+    border: none;
+    outline: 3px solid #fff;
+    border-radius: 1em;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.912);
+    transition: background-color 0.3s;
   }
   
   .connect-button {
-    background-color: #F24E1E;
+    background-color: #f24f1eb7;
     color: white;
   }
   .connect-button:hover {
-    background-color: #000000;
+    background-color: #852c11;
     color: white;
   }
   
   .github-button {
-    background-color: #24227E;
+    background-color: transparent;
     outline: 5px solid #fff;
     outline-width: 2px;
     color: white;
@@ -117,8 +121,8 @@
   }
   
   .hero-image img {
-    width: 400px;
-    height: 400px;
+    width: 80%;
+    border-radius: 10%;
   }
 
   hr.rounded{
@@ -129,20 +133,22 @@
     margin-bottom: 5%;
     height: 10px;
     background-color: #fff;
+    
   }
 
-  
   .learn-more {
     color: #fff;
     padding: 40px;
     width: 100%;
     border-radius: 10px;
     text-size-adjust: 100%;
+    text-align: left;
   }
   
   .learn-more h2 {
     margin-bottom: 20px;
     font-size: 3.5em;
+    
   }
   
   .learn-more p {
@@ -150,9 +156,4 @@
     font-size: 2.5em;
   }
 
-  #chessboard-container {
-    display: grid;
-    place-content: center;
-    height: 850px;
-
-  }
+  

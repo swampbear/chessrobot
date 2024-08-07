@@ -7,7 +7,7 @@
     color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.712);
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 600;
     height: 40%;
     width: 100%;
@@ -58,6 +58,7 @@
     overflow-y: auto;
     padding: 15px;
     color: #fff; /* Optional: set text color for better readability */
+    font-size: 1.5rem;
 }
 
 .pgn-display::-webkit-scrollbar {

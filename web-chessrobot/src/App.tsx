@@ -8,7 +8,6 @@ import { PieceColorProvider } from './contextproviders/pieceColor/PieceColorCont
 import Selection from './pages/selection/Selection';
 import BoardConfig from './pages/boardconfig/BoardConfig';
 import Game from './pages/game/Game';
-import Header from './components/header/Header';
 import { Footer } from './components/footer/Footer';
 import {AnimatePresence} from "framer-motion"
 
@@ -41,7 +40,6 @@ function App() {
       <SocketProvider socket={socketInstance}>
         <PieceColorProvider>
           <Main />
-          <Footer />
         </PieceColorProvider>
       </SocketProvider>
     </Router>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap');
+
 :root {
     --dark: #24227E;
     --light: aliceblue;
@@ -27,8 +29,8 @@ html, body {
 }
 
 #header-container {
-    padding: 0 5%;
     text-align: center;
+    height: 100dvh;
 }
 
 #content-container {
@@ -45,11 +47,9 @@ html, body {
 #left-panel,
 #right-panel {
     width: 100%;
-    height: 81dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 2em;
 }
 
 #opponent-info, 
@@ -76,9 +76,7 @@ html, body {
 .opponent-details, 
 .player-details {
     text-align: left;
-
 }
-
 
 .opponent-details h2,
 .player-details h2 {
@@ -107,7 +105,6 @@ html, body {
 
 #moves-played {
     margin-top: 50px;
-    margin-bottom: 50px;
     text-align: left;
     font-size: larger;
     width: 100%;
@@ -118,32 +115,25 @@ html, body {
     border-radius: 10px;
 }
 
-#status-message {
-    color: #fff;
-    padding: 20px;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    text-align: center;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    min-height: 30%;
-    width: 80%;
-    max-width: 100%;
+.typewriter p {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 0.15em solid orange;
 }
 
 #buttons-container {
     display: flex;
     justify-content: space-between;
-    width: 90%;
-    max-width: 400px;
+    width: 100%;
+    height: 10dvh;
     gap: 5rem;
 }
 
 .resign-button, 
 .confirm-button {
     width: 48%;
-    padding:    10px;
+    padding: 1rem 2rem;
     font-size: 1.4rem;
     font-weight: 700;
     border-radius: 10px;
@@ -173,7 +163,7 @@ html, body {
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
-        min-width: 80vw;
+        min-width: 92vw;
     }
 
     #left-panel,
@@ -189,13 +179,10 @@ html, body {
 
 @media (min-width: 1024px) {
     #header-container {
-        padding: 0 10%;
+        padding: 0 5%;
     }
 
     #moves-played {
         font-size: 1.2rem;
     }
-
-   
 }
-

@@ -25,47 +25,55 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
   justify-content: center;
   box-sizing: border-box;
+  height: 100vh;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 89dvh;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 100%;
   width: 100%;
   max-width: 1200px;
   background-color: transparent;
+  padding: 20px;
+  gap: 10%;
 }
 
 #difficulty-container,
 #pieces-container,
 #beforegame-container {
-  width: 100%;
+  flex: 1;
   margin-bottom: 20px;
-  text-align: center;
+  width: 100%;
 }
 
 h2.title {
-  font-size: 3em;
+  font-size: 2.5em;
   margin-bottom: 0.5em;
   color: var(--light);
+  text-align: left;
 }
 
 .difficulty-button,
 .pieces-button {
+  display: block;
+  width: 100%;
   background-color: transparent;
   color: var(--light);
   border: 4px solid var(--button-border);
-  padding: 0.75em 1.5em;
+  padding: 1em;
   font-size: 2em;
   font-weight: 600;
   cursor: pointer;
-  margin-right: 0.5em;
-  margin-left: 0.5em;
-  border-radius: 100px;
+  margin-bottom: 0.5em;
+  border-radius: var(--border-radius);
   transition: background-color 0.3s, color 0.3s;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.912);
 }
 
 .difficulty-button.easy.selected {
@@ -98,54 +106,62 @@ h2.title {
   border: none;
 }
 
-.difficulty-button:hover,
+.pieces-button.random.selected {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+}
+
 .pieces-button:hover {
   background-color: var(--button-hover-bg);
   color: var(--button-text);
   transition: background-color 1s, color 0.3s;
 }
 
-.instructions-list {
-  list-style-type: disc;
-  text-align: left;
-  font-weight: 600;
-  font-size: 1.2em;
-  padding: 0 20px;
+.pieces-button.white.selected:hover {
+  background-color: var(--white-bg);
 }
 
-.instructions-list li {
-  padding: 0.5em;
-  border-radius: 5px;
+.pieces-button.black.selected:hover {
+  background-color: var(--black-bg);
+}
+
+.pieces-button.random.selected:hover {
+  background-color: var(--button-hover-bg);
 }
 
 .next-button {
-  background-color: transparent;
-  color: var(--light);
-  border: 5px solid var(--button-border);
-  padding: 0.5em 1.5em;
-  font-size: 1.2em;
-  font-weight: 600;
+  align-self: flex-end;
+  background-color: #f24f1eb7;
+  color: white;
+  padding: 10px 70px;
+  font-size: 3.5em;
+  font-weight: 800;
   cursor: pointer;
-  margin: 0.5em;
-  border-radius: var(--border-radius);
+  border: none;
+  outline: 3px solid #fff;
+  border-radius: 1em;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.912);
+  transition: background-color 0.3s;
+  margin: 1em;
 }
 
 .next-button:hover {
-  background-color: #F24E1E;
-  transition: background-color 1.5s, color 0.3s;
+  background-color: #852c11;
 }
 
 /* Responsive Design */
 @media (min-width: 768px) {
   .container {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
   }
 
   #difficulty-container,
   #pieces-container,
   #beforegame-container {
-    width: 80%;
+    width: 45%;
     margin-bottom: 10px;
   }
 
@@ -154,9 +170,8 @@ h2.title {
   }
 
   .difficulty-button,
-  .pieces-button,
-  .next-button {
-    padding: em 2em;
+  .pieces-button {
+    padding: 1em 2em;
     font-size: 1.2em;
   }
 
@@ -166,14 +181,12 @@ h2.title {
 }
 
 @media (min-width: 1024px) {
- 
   h2.title {
-    font-size: 3.5em;
+    font-size: 4.5em;
   }
 
   .difficulty-button,
-  .pieces-button,
-  .next-button {
+  .pieces-button {
     padding: 0.5em 1.5em;
     font-size: 2.5em;
   }
