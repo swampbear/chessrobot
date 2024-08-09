@@ -81,6 +81,21 @@ const Game = () => {
         }
     }, [socket]);
 
+    /**
+     * UpdatesPGN when recieved from 
+     */
+    useEffect(() => {
+        try {
+            if (socket) {
+                socket.on('updatePGN', (PGN) => {
+                    setMovesPGN(PGN);
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }, [socket]);
+
     useEffect(() => {
         try {
             if (socket) {
@@ -117,6 +132,7 @@ const Game = () => {
 
     const handleConfirmMove = async () => {
         if (playerMove.isLegal && isPlayerTurn) {
+            socket?.emit('confirmMove');
             setIsShowingHistoryMove(false);
             setIsPlayerTurn(false);
             await new Promise(r => setTimeout(r, 3000));
@@ -126,6 +142,10 @@ const Game = () => {
 
     const handleResignPress = () => {
         // Add your resign logic here
+        // TODO Verify that user wants to resign, with modal
+        if(socket) {
+            socket.emit('resign')
+        }
     };
 
     if (loading) {

@@ -13,18 +13,42 @@ import { motion } from "framer-motion"
 
 const BoardConfig = () => {
     const { socket } = useSocket();
-    const [isValid, setIsValid] = useState<boolean>(true);
+    const [isBoardValid, setIsBoardValid] = useState<boolean>(true);
     const { pieceColor, setPieceColor } = usePieceColor();
     const [loading, setLoading] = useState<boolean>(true);
-    const [startFen, setStartFen] = useState('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR')
+    const [startFen] = useState('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR')
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        function fetchIsBoardValid() {
+            try {
+                if (socket) {
+                    socket.emit('boardValidation');
+                    socket.on('boardValidValue', (isValid: boolean) => {
+                        if (isValid.valueOf === null) {
+                            throw new Error('Valid value cannot be null');
+                        }
+                        setIsBoardValid(isValid);
+                    });
+                }
+            } catch (error) {
+                console.error(error);
+                alert("There has been an error fetching piece color from the socket.");
+            }
+        }
+
+        fetchIsBoardValid()
+
+        return () => {
+            socket?.off('boardValidation');
+        };
+    }, [socket]);
 
     useEffect(() => {
         function fetchPieceColor() {
             try {
                 if (socket) {
-                    socket.emit('getColor');
                     socket.on('getColor', (color: string) => {
                         if (color === '') {
                             throw new Error('Color cannot be empty');
@@ -48,7 +72,8 @@ const BoardConfig = () => {
 
     const handleStartGameClick = () => {
         try {
-            if (isValid) {
+            if (isBoardValid && socket) {
+                socket.emit('startGame');
                 navigate('/game');
                 toast.success("Everything is set up correctly");
             } else {
