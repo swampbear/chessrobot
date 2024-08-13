@@ -59,8 +59,8 @@ html, body {
 }
 
 .avatar {
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     background-color: #fff;
     margin-right: 10px;
@@ -103,30 +103,11 @@ html, body {
     width: 100%;
 }
 
-#moves-played {
-    margin-top: 50px;
-    text-align: left;
-    font-size: larger;
-    width: 100%;
-    padding: 0 20px;
-    box-sizing: border-box;
-    background-color: #D5D4FF;
-    color: #000;
-    border-radius: 10px;
-}
-
-.typewriter p {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 0.15em solid orange;
-}
-
 #buttons-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 10dvh;
+    height: 9dvh;
     gap: 5rem;
 }
 

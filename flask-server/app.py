@@ -41,19 +41,21 @@ def handle_json(json):
     print('Recieved message:', json)
     global dataJson
     dataJson = json
+    print(dataJson)
     send(json, json=True)
 
 @socketio.on('getColor')
 def handle_get_color():
-    if dataJson is not None and 'Conditions' in dataJson and 'pieceColor' in dataJson['Conditions']:
-        emit('getColor', dataJson['Conditions']['pieceColor'])
+    if dataJson is not None and 'conditions' in dataJson and 'pieceColor' in dataJson['conditions']:
+        emit('getColor', dataJson['conditions']['pieceColor'])
     else:
         emit('getColor', 'Color not available')
 
 @socketio.on('getDifficulty')
 def handle_get_difficulty():
-    if dataJson is not None and 'Conditions' in dataJson and 'difficulty' in dataJson['Conditions']:
-        emit('getDifficulty', dataJson['Conditions']['difficulty'])
+    print(dataJson)
+    if dataJson is not None and 'conditions' in dataJson and 'difficulty' in dataJson['conditions']:
+        emit('getDifficulty', dataJson['conditions']['difficulty'])
     else:
         emit('getDifficulty', 'Difficulty not available')
 

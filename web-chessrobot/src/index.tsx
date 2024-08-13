@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ErrorBoundary fallback={<div>Something went wrong.</div>}>
+    <ErrorBoundary fallback={<div>Problem with rendering page</div>}>
       <App />
     </ErrorBoundary>
   </React.StrictMode>

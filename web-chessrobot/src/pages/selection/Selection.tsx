@@ -1,7 +1,6 @@
 import './Selection.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSocket } from '../../contextproviders/socket/SocketContext';
@@ -15,7 +14,9 @@ const Selection = () => {
 
     const handleNextPage = async () => {
         if (socket?.connected && selectedDifficulty && selectedPiece) {
-            socket.emit('json', { Conditions: { difficulty: selectedDifficulty, pieceColor: selectedPiece } });
+            let conditions = { difficulty: selectedDifficulty, pieceColor: selectedPiece } 
+            socket.emit('json', { conditions });
+            console.log(conditions)
             navigate('/boardconfig');
         } else if (!socket?.connected) {
             toast.error('You have disconnected from the robot, have you tried turning it off and on again');
@@ -37,11 +38,7 @@ const Selection = () => {
     };
 
     return (
-        <motion.div id="header-container" className="gradientBackground"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-        >
+        <div id="header-container" className="gradientBackground">
             {/* <Header /> */}
             <div id="selection" className="gradientBackground">
                 <div className="container">
@@ -91,7 +88,7 @@ const Selection = () => {
                     <button className="next-button" onClick={handleNextPage}>NEXT</button>
             </div>
             <ToastContainer />
-        </motion.div>
+        </div>
     );
 };
 

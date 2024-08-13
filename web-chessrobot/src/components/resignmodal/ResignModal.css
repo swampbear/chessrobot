@@ -1,0 +1,109 @@
+@keyframes flyInFromBottom {
+    0% {
+        transform: translateY(100vh); /* Start below the viewport */
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0); /* End at the final position */
+        opacity: 1;
+    }
+}
+
+.resign-modal-container {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.resign-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fefefe;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 30dvw;
+    height: auto;
+    max-width: 400px;
+    color: #333;
+    text-align: center;
+    animation: flyInFromBottom 0.5s ease-out forwards; /* Apply fly-in animation */
+}
+
+.resign-modal h2 {
+    margin-bottom: 10px;
+    font-size: 4dvh; /* Responsive font-size */
+    color: #222;
+}
+
+.resign-modal p {
+    margin-bottom: 20px;
+    font-size: 3dvh; /* Responsive font-size */
+    color: #555;
+}
+
+.resign-modal .resign-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.resign-modal button {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 4dvh; /* Responsive font-size */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.resign-modal button:hover {
+    transform: scale(1.05);
+}
+
+.resign-modal button:active {
+    transform: scale(0.95);
+}
+
+.resign-modal button:first-child {
+    background-color: #ccc;
+    color: #333;
+}
+
+.resign-modal button:first-child:hover {
+    background-color: #bbb;
+}
+
+.resign-modal button:last-child {
+    background-color: #d9534f;
+    color: white;
+}
+
+.resign-modal button:last-child:hover {
+    background-color: #c9302c;
+}
+
+.resign-modal button:disabled {
+    background-color: #eee;
+    color: #aaa;
+    cursor: not-allowed;
+}

@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+    }
 
 
 #chessboard {
@@ -28,7 +28,7 @@
 }
 
 #vertical-numbers, #horizontal-letters{
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
 #vertical-numbers {
@@ -48,7 +48,7 @@
   align-items: center;
 }
 #horizontal-letters {
-  margin-top: 10px;
+  margin-top: 8px;
   grid-area: horizontal-letters;
   display: flex;
   justify-content: space-between; /* Space between each letter */

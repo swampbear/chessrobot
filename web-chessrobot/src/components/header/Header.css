@@ -24,3 +24,13 @@
     cursor: pointer; /* Pointer cursor on hover */
     text-transform: lowercase; /* Optional: transform text to uppercase */
   }
+
+  #settings {
+    font-size: 1.8em; /* Size of the settings text */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-transform: lowercase; /* Optional: transform text to uppercase */
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-weight: 600;
+  }

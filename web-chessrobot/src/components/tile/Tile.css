@@ -27,14 +27,14 @@
     cursor: grabbing;
 }
 .tile .chess-piece{
-    width: 8dvh;
-    height: 8dvh;
+    width: 7.2dvh;
+    height: 7.2dvh;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 }
 
 .tile {
-    width: 8.5dvh;
-    height: 8.5dvh;
+    width: 7.5dvh;
+    height: 7.5dvh;
 }

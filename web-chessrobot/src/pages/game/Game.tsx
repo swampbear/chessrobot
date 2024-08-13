@@ -7,17 +7,26 @@ import './Game.css';
 import { useSocket } from "../../contextproviders/socket/SocketContext";
 import ErrorBoundary from "../../ErrorBoundary";
 import { ToastContainer } from "react-toastify";
-import { motion } from "framer-motion";
 import MoveHistory from "../../components/moveshistory/MoveHistory";
 import PieceGraveyard from "../../components/piecegraveyard/PieceGraveyard";
 import StatusMessage from "../../components/statusmessage/StatusMessage";
+import ResignModal from "../../components/resignmodal/ResignModal";
+import { useNavigate } from "react-router-dom";
 
+/**
+ * Interface for a move
+ * @interface Move
+ */
 interface Move {
     pgn: string;
     fen: string;
     isLegal: boolean;
 }
 
+/**
+ * 
+ * @returns Game page for chess game
+ */
 const Game = () => {
     const { pieceColor, setPieceColor } = usePieceColor();
     const [isPlayerTurn, setIsPlayerTurn] = useState(true);
@@ -39,6 +48,8 @@ const Game = () => {
     const [robotMove, setRobotMove] = useState<Move>(initialMove);
     const [loading, setLoading] = useState(true);
     const { socket } = useSocket();
+    const [modalVisible, setModalVisible] = useState(false);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const savedPieceColor = localStorage.getItem('pieceColor');
@@ -140,11 +151,15 @@ const Game = () => {
         }
     };
 
+    const showModal = () =>{
+        setModalVisible(true)
+    }
+
     const handleResignPress = () => {
-        // Add your resign logic here
-        // TODO Verify that user wants to resign, with modal
         if(socket) {
             socket.emit('resign')
+            navigate('/end')
+            //TODO create end
         }
     };
 
@@ -167,11 +182,11 @@ const Game = () => {
     );
 
     return (
-        <motion.div id="header-container" className="gradientBackground"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+        <div id="header-container" className="gradientBackground"
         >
+            {modalVisible && <ResignModal onResign={handleResignPress} onCancel={() => setModalVisible(false)}/>}
+                
+                <Header />
             <div id="content-container">
                 <div id="left-panel">
                     <div id="opponent-info">
@@ -179,7 +194,7 @@ const Game = () => {
                             <img src="./assets/images/robotics_logo.jpg" alt="Opponent Avatar" />
                         </div>
                         <div className="opponent-details">
-                            <h2>CHESS ROBOT {difficulty}</h2>
+                            <h2 key={difficulty}>CHESS ROBOT {difficulty}</h2>
                             <PieceGraveyard key={dgtBoardFEN} pieceColor={pieceColor === 'white' ? 'white' : 'black'} fen={isShowingHistoryMove ? historyIndexFEN : dgtBoardFEN} />
                         </div>
                     </div>
@@ -201,12 +216,12 @@ const Game = () => {
                     <StatusMessage message={statusMessage} />
                     <div id="buttons-container">
                         <button className="confirm-button" disabled={!isPlayerTurn} onClick={handleConfirmMove}>CONFIRM MOVE</button>
-                        <button className="resign-button" disabled={!isPlayerTurn} onClick={handleResignPress}>RESIGN</button>
+                        <button className="resign-button" disabled={!isPlayerTurn} onClick={showModal}>RESIGN</button>
                     </div>
                 </div>
             </div>
             <ToastContainer />
-        </motion.div>
+        </div>
     );
 
     function capitalizeFirstLetter(str: string): string {

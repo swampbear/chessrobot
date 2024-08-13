@@ -10,6 +10,7 @@ import BoardConfig from './pages/boardconfig/BoardConfig';
 import Game from './pages/game/Game';
 import { Footer } from './components/footer/Footer';
 import {AnimatePresence} from "framer-motion"
+import ErrorBoundary from './ErrorBoundary';
 
 function App() {
   const [socketInstance, setSocketInstance] = useState<Socket | null>(null);
@@ -39,7 +40,9 @@ function App() {
     <Router>
       <SocketProvider socket={socketInstance}>
         <PieceColorProvider>
-          <Main />
+          <ErrorBoundary fallback={<div>Problem with initiating main</div>}>
+              <Main />
+          </ErrorBoundary>
         </PieceColorProvider>
       </SocketProvider>
     </Router>
@@ -50,14 +53,15 @@ function Main() {
   const location = useLocation();
 
   return (
-    <AnimatePresence>
-      <Routes key={location.pathname} location={location}>
+    <>
+       <Routes>
         <Route index element={<Home />} />
+        <Route path="/home" element={<Home />} /> {/* Add this line */}
         <Route path="/selection" element={<Selection />} />
         <Route path="/boardconfig" element={<BoardConfig />} />
         <Route path="/game" element={<Game />} />
       </Routes>
-    </AnimatePresence>
+    </>
   );
 }
 

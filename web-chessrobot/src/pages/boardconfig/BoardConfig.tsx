@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/header/Header';
-import { Footer } from '../../components/footer/Footer';
 import Chessboard from '../../components/chessboard/Chessboard';
 import './BoardConfig.css';
 import { useSocket } from '../../contextproviders/socket/SocketContext';
@@ -9,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from 'react-router-dom';
 import { usePieceColor } from '../../contextproviders/pieceColor/PieceColorContext';
 import ErrorBoundary from '../../ErrorBoundary';
-import { motion } from "framer-motion"
 
 const BoardConfig = () => {
     const { socket } = useSocket();
@@ -49,10 +47,12 @@ const BoardConfig = () => {
         function fetchPieceColor() {
             try {
                 if (socket) {
+                    socket.emit('getColor')
                     socket.on('getColor', (color: string) => {
                         if (color === '') {
                             throw new Error('Color cannot be empty');
                         }
+                        console.log(color)
                         setPieceColor(color);
                         setLoading(false);
                     });
@@ -62,13 +62,11 @@ const BoardConfig = () => {
                 alert("There has been an error fetching piece color from the socket.");
             }
         }
-
         fetchPieceColor();
-
         return () => {
             socket?.off('getColor');
         };
-    }, [socket, setPieceColor]);
+    }, [socket, pieceColor]);
 
     const handleStartGameClick = () => {
         try {
@@ -86,14 +84,7 @@ const BoardConfig = () => {
     }
 
     return (
-        <motion.div 
-            id="header-container" 
-            className="gradientBackground"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 2}}
-        >
+        <div id="header-container" className='gradientBackground'>
             <Header />
             <div id="boardconfig">
                 <div id="chessboard-area">
@@ -121,7 +112,7 @@ const BoardConfig = () => {
                 </div>
             </div>
             <ToastContainer />
-        </motion.div>
+        </div>
     );
 };
 

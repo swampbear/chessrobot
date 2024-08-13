@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './Home.css';
 import Header from '../../components/header/Header';
-import { Footer } from '../../components/footer/Footer';
 import { useNavigate } from 'react-router-dom';
 import { useSocket } from '../../contextproviders/socket/SocketContext';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { motion } from "framer-motion"
+import ErrorBoundary from '../../ErrorBoundary';
 
 export default function Home() {
     const {socket} = useSocket()
@@ -20,12 +19,8 @@ export default function Home() {
             toast.error("Unnable to connect to robot, have you tried turning it on and off again?")
     }};
 
-    return (
-       <motion.div id="home" className='gradientBackground'
-       initial={{opacity: 0}}
-       animate={{opacity: 1}}
-       exit={{opacity: 0}}
-       >
+    return ( 
+       <div id="home" className='gradientBackground'>
             <Header/>
             <ToastContainer/>
             <div id="home-container">
@@ -61,9 +56,8 @@ export default function Home() {
                     </p>
                     </div>
             </div>
-        </motion.div>
+        </div>
       
-
     );
 };
 
