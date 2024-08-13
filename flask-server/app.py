@@ -30,6 +30,7 @@ app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 dataJson = None
+outcome = ''
 
 @socketio.on('message')
 def handle_message(msg):
@@ -76,7 +77,15 @@ def test_playerMove():
     else:
         print('player move is None')
 
-
+@socketio.on('resign')
+def handle_resign():
+    global outcome
+    outcome = 'lost'
+    
+@socketio.on('getOutcome')
+def handle_get_outcome():
+    global outcome
+    emit('getOutcome', outcome)
 
 
 if __name__ == '__main__':

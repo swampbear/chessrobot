@@ -11,6 +11,7 @@ import Game from './pages/game/Game';
 import { Footer } from './components/footer/Footer';
 import {AnimatePresence} from "framer-motion"
 import ErrorBoundary from './ErrorBoundary';
+import End from './pages/end/End';
 
 function App() {
   const [socketInstance, setSocketInstance] = useState<Socket | null>(null);
@@ -60,6 +61,7 @@ function Main() {
         <Route path="/selection" element={<Selection />} />
         <Route path="/boardconfig" element={<BoardConfig />} />
         <Route path="/game" element={<Game />} />
+        <Route path="/end" element={<End/>} />
       </Routes>
     </>
   );
