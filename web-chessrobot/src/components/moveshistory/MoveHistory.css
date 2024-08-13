@@ -52,7 +52,7 @@
     background-color: #5e5e5e;
     border-radius: 8px;
     width: 90%;
-    height: 150px; /* Set a fixed height or max-height */
+    height: 15dvh; /* Set a fixed height or max-height */
     text-align: left;
     line-height: 30px;
     overflow-y: auto;

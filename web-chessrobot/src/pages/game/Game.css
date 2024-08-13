@@ -36,6 +36,7 @@ html, body {
 #content-container {
     width: 100%;
     max-width: 1200px;
+    max-height: 88dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -50,6 +51,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-height: 85dvh;
 }
 
 #opponent-info, 
