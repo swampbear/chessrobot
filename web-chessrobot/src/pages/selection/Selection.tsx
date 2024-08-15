@@ -1,3 +1,4 @@
+
 import './Selection.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -5,7 +6,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSocket } from '../../contextproviders/socket/SocketContext';
 
-const Selection = () => {
+/**
+ * Represents the Selection page.
+ * This page allows the user to choose the difficulty level and pieces for the chess game.
+ * @returns {JSX.Element} The Selection page
+ */
+const Selection = (): JSX.Element => {
     const navigate = useNavigate();
     const { socket } = useSocket();
     const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(null);

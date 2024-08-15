@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/header/Header';
 import Chessboard from '../../components/chessboard/Chessboard';
@@ -9,7 +10,11 @@ import { useNavigate } from 'react-router-dom';
 import { usePieceColor } from '../../contextproviders/pieceColor/PieceColorContext';
 import ErrorBoundary from '../../ErrorBoundary';
 
-const BoardConfig = () => {
+/**
+ * Represents the BoardConfig component.
+ * This component is responsible for configuring the chessboard and starting the game.
+ */
+const BoardConfig = () : React.JSX.Element => {
     const { socket } = useSocket();
     const [isBoardValid, setIsBoardValid] = useState<boolean>(true);
     const { pieceColor, setPieceColor } = usePieceColor();

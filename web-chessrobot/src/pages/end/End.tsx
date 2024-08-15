@@ -3,7 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import './End.css';
 import { useSocket } from '../../contextproviders/socket/SocketContext';
 
-const End = () => {
+
+/**
+ * The End component represents the end screen of the game.
+ * It displays the outcome of the game (win, lose, or draw) and provides a button to return to the home screen.
+ */
+
+const End = () : React.JSX.Element => {
     const navigate = useNavigate();
     const {socket} = useSocket();
     const [outcome, setOutcome] = React.useState<string>('');
