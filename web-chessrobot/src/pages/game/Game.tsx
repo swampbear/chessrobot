@@ -170,17 +170,16 @@ const Game = () => {
                 <div id="content-container">
                     <p>Loading...</p>
                 </div>
-                <Footer />
+                <Footer/>
             </div>
         );
     }
 
     const renderChessboard = () => (
-        <ErrorBoundary fallback="Error loading the chessboard">
-            <Chessboard key={isShowingHistoryMove ? `history-${historyIndexFEN}` : `current-${dgtBoardFEN}`} dgtBoardFEN={isShowingHistoryMove ? historyIndexFEN : dgtBoardFEN} />
+        <ErrorBoundary fallback={<div>Error loading the chessboard</div>}>
+            <Chessboard dgtBoardFEN={isShowingHistoryMove ? historyIndexFEN : dgtBoardFEN} />
         </ErrorBoundary>
     );
-
     return (
         <div id="header-container" className="gradientBackground"
         >

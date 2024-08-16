@@ -18,25 +18,25 @@ type ChessboardProps = {
 * @context pieceColor is needed to know which orientation the board should be rendered
 * @returns JSX.ELEMENT chessboard component
 */       
-const Chessboard = ({dgtBoardFEN}: ChessboardProps) => {
-    const { pieceColor, setPieceColor} = usePieceColor()
-    const[isPlayingWhite, setIsPlayingWhite] = useState(pieceColor === 'white')
-    const[boardFen, setBoardFEN] = useState<string>(dgtBoardFEN)
+
+const Chessboard = ({ dgtBoardFEN }: ChessboardProps) => {
+    const { pieceColor } = usePieceColor();
+    const [isPlayingWhite, setIsPlayingWhite] = useState(pieceColor === 'white');
+    const [boardFen, setBoardFEN] = useState<string>(dgtBoardFEN);
     const [pieces, setPieces] = useState<Piece[]>([]);
     const [previousPieces, setPreviousPieces] = useState<{ [key: string]: string }>({});
     const [frameHorizontal, setFrameHorizontal] = useState<JSX.Element[]>([]);
     const [frameVertical, setFrameVertical] = useState<JSX.Element[]>([]);
 
-   
-    useEffect (()=> {
-        try {
-            setIsPlayingWhite(pieceColor === 'white');
-        } catch (error) {
-            console.error('Error setting isPlayingWhite', error)
-        }
-        drawPieces(isPlayingWhite, boardFen, setPieces, setBoardFEN);
+    useEffect(() => {
+        setIsPlayingWhite(pieceColor === 'white');
         drawCoordinateAxis(isPlayingWhite, setFrameHorizontal, setFrameVertical);
-    },[isPlayingWhite, dgtBoardFEN]);
+    }, [isPlayingWhite, dgtBoardFEN]);
+
+    useEffect(() => {
+    console.log('FEN changed:', dgtBoardFEN);
+    drawPieces(isPlayingWhite, dgtBoardFEN, setPieces, setBoardFEN);
+}, [dgtBoardFEN, isPlayingWhite]);
 
     useEffect(() => {
         const pieceMap: { [key: string]: string } = {};
@@ -47,6 +47,7 @@ const Chessboard = ({dgtBoardFEN}: ChessboardProps) => {
         setPreviousPieces(pieceMap);
     }, [pieces]);
 
+    
 
     return (
         <div id='container'>
@@ -54,15 +55,15 @@ const Chessboard = ({dgtBoardFEN}: ChessboardProps) => {
                 <section id="vertical-numbers">
                     {frameVertical}
                 </section>
-                <div id="chessboard">   
+                <div id="chessboard">
                     {createBoard(pieces, previousPieces)}
-                </div>   
+                </div>
                 <section id="horizontal-letters">
                     {frameHorizontal}
                 </section>
             </div>
-         </div>
-    )
-}
+        </div>
+    );
+};
 
 export default Chessboard;

@@ -4,16 +4,16 @@ import { Piece } from './Piece';
 
 export const createBoard = (pieces: Piece[], previousPieces: { [key: string]: string }) => {
     const board = [];
-        for (let i = 8 - 1; i >= 0; i--) {
-            for (let j = 0; j < 8; j++) {
-                const number = i + j + 2;
-                const positionKey = `${j},${i}`;
-                const image = previousPieces[positionKey];
-                board.push(<Tile key={positionKey} image={image} number={number} />);
-            }
+    for (let i = 8 - 1; i >= 0; i--) {
+        for (let j = 0; j < 8; j++) {
+            const number = i + j + 2;
+            const positionKey = `${j},${i}`;
+            const image = previousPieces[positionKey];
+            board.push(<Tile key={positionKey} x={j} y={i} image={image} number={number} />);
         }
-        return board;
-    };
+    }
+    return board;
+};
 
 
 export const drawCoordinateAxis = (
@@ -91,7 +91,18 @@ export const setUpPositionFromFEN = (
                 }
             }
         });
-        setPieces(pieces); 
+
+        // Map over the pieces to update their previous positions
+        setPieces(prevPieces => 
+            pieces.map(piece => {
+                const prevPiece = prevPieces.find(p => p.image === piece.image);
+                return {
+                    ...piece,
+                    previousX: prevPiece ? prevPiece.x : piece.x,
+                    previousY: prevPiece ? prevPiece.y : piece.y,
+                };
+            })
+        );
         setCurrentBoardFEN(FEN);  
     } catch (error) {
         console.error("Error trying to set up position from FEN", error);
