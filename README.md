@@ -71,6 +71,8 @@ npm start
 
 <img width="178" alt="Screenshot 2024-08-23 at 13 37 59" src="https://github.com/user-attachments/assets/b333c83e-09df-4146-bf6b-83bf66cab7d7">
 
+Pages and Components folders contain two files(usually) a tsx file and a css file
+
 ## Project progression <a name="progression"></a>
 
 The project consists of several key stages, both for the graphical user interface (GUI) and the Python backend. Below is an overview of the current progress:
