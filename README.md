@@ -9,6 +9,7 @@ For the project to function correctly, both applications need to run simultaneou
 1. [Running the application](#running)
    1. [Python flask server](#subrunning1)
    2. [React web-client](#subrunning2)
+2. [Structure web-client](#structure) 
 3. [Project progression](#progression)
 4. [Summary](#summary)
 
@@ -38,6 +39,18 @@ python3 app.js
 
 
 ## React web-client - terminal commands <a name="subrunning2"></a>
+Install NVM(Node Version Manager)
+In your terminal run the nvm installer like this
+````bash
+#macOS/Linux
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+# or
+#Windows
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+````
+Read more about downloadning nvm here: [Github page nvm](https://github.com/nvm-sh/nvm)
+
 Navigate to the web-chessrobot folder:
 ````bash
 cd web-chessrobot
@@ -50,6 +63,7 @@ Start the React development server:
 ````bash
 npm start
 ````
+## Structure web-client <a name="structure"></a>
 
 ## Project progression <a name="progression"></a>
 
@@ -68,7 +82,15 @@ The project consists of several key stages, both for the graphical user interfac
 ### Python Backend Development
 - [x] Set up flask-server project
 - [x] Set up socket
-- [ ] Integrate with Chess program (currently located in another repository)
+- [ ] Integrate with Chess program (currently located in another repository) most of these are halted bacause we need to place responsibility for where the events should be triggered. They have been tested with test data
+   - [x] Start event(requires a connected socket to continue from home page)
+   - [ ] Selection event
+   - [ ] Start Game event
+   - [ ] Confirm Move event
+   - [ ] Move History
+   - [ ] Resign event
+   - [ ] Win on checkmate
+
 
 ## Summary <a name="summary"></a>
 
