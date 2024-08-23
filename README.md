@@ -64,6 +64,12 @@ Start the React development server:
 npm start
 ````
 ## Structure web-client <a name="structure"></a>
+### The main structure of the react project consists mainly of 3 folders
+- Pages <-- Contains the different pages of the application(Home, Selection, Boardconfig, Game, End)
+- Components <-- Components that are used inside the pages, most of these are reusable requiring 1 or 2 paramaters(Chessboard, Move History, StatusMessage, ...)
+- ContextProviders <-- Responsible for remembering globaly set variables(Socket, Color). These viariables can be accessed and changed by all the children of the providers
+
+<img width="178" alt="Screenshot 2024-08-23 at 13 37 59" src="https://github.com/user-attachments/assets/b333c83e-09df-4146-bf6b-83bf66cab7d7">
 
 ## Project progression <a name="progression"></a>
 
